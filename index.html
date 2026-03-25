@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Songify – Listen to Music Free</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #e4e2dd;
+        --black: #545454;
+        --green: #1ed760;
+        --font-heading: "Outfit", sans-serif;
+        --font-body: "Plus Jakarta Sans", sans-serif;
+        --font-ui: "Inter", sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--black);
+        font-family: var(--font-body);
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ───────────── NAVBAR ───────────── */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        padding: 0 48px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(228, 226, 221, 0.82);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        transition: background 0.3s;
+      }
+
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-heading);
+        font-weight: 900;
+        font-size: 1.35rem;
+        letter-spacing: -0.5px;
+      }
+
+      .navbar__logo svg {
+        width: 32px;
+        height: 32px;
+        fill: var(--green);
+        flex-shrink: 0;
+      }
+
+      .navbar__links {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        list-style: none;
+      }
+
+      .navbar__links li a {
+        font-family: var(--font-ui);
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 0.01em;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: background 0.25s ease;
+      }
+
+      .navbar__links li a:hover {
+        background: rgba(0, 0, 0, 0.06);
+      }
+
+      .navbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-ui);
+        font-weight: 600;
+        font-size: 0.88rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 100px;
+        transition: transform 0.2s, box-shadow 0.2s, background 0.25s,
+          color 0.25s;
+      }
+
+      .btn:active {
+        transform: scale(0.96);
+      }
+
+      .btn--ghost {
+        background: transparent;
+        color: var(--black);
+        padding: 10px 24px;
+        border: 1.5px solid rgba(0, 0, 0, 0.2);
+        transition: background 0.25s ease, border-color 0.25s ease;
+      }
+
+      .btn--ghost:hover {
+        background: rgba(0, 0, 0, 0.04);
+        border-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .btn--primary {
+        background: var(--green);
+        color: var(--black);
+        padding: 10px 28px;
+        box-shadow: 0 2px 8px rgba(30, 215, 96, 0.2);
+        transition: filter 0.25s ease;
+      }
+
+      .btn--primary:hover {
+        filter: brightness(1.08);
+      }
+
+      /* hamburger */
+      .navbar__hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+
+      .navbar__hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--black);
+        border-radius: 4px;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+
+      /* ───────────── HERO ───────────── */
+      .hero {
+        min-height: 100vh;
+        padding: 72px 48px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero__bg-blur {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.45;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hero__bg-blur--green {
+        width: 600px;
+        height: 600px;
+        background: var(--green);
+        top: -120px;
+        right: -100px;
+        opacity: 0.18;
+      }
+
+      .hero__bg-blur--dark {
+        width: 500px;
+        height: 500px;
+        background: var(--black);
+        bottom: -80px;
+        left: -80px;
+        opacity: 0.06;
+      }
+
+      .hero__container {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 64px;
+        max-width: 1280px;
+        width: 100%;
+      }
+
+      .hero__content {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(30, 215, 96, 0.12);
+        border: 1px solid rgba(30, 215, 96, 0.25);
+        color: var(--black);
+        font-family: var(--font-ui);
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 7px 16px;
+        border-radius: 100px;
+        width: fit-content;
+      }
+
+      .hero__badge span.dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: pulse-dot 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse-dot {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.4);
+        }
+      }
+
+      .hero__title {
+        font-family: var(--font-heading);
+        font-weight: 900;
+        font-size: clamp(2.8rem, 5.5vw, 5rem);
+        line-height: 1.02;
+        letter-spacing: -2px;
+        color: var(--black);
+      }
+
+      .hero__title .highlight {
+        color: var(--green);
+        position: relative;
+        display: inline-block;
+      }
+
+      .hero__title .highlight::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        width: 100%;
+        height: 6px;
+        background: var(--green);
+        opacity: 0.25;
+        border-radius: 4px;
+      }
+
+      .hero__subtitle {
+        font-family: var(--font-body);
+        font-weight: 400;
+        font-size: 1.15rem;
+        line-height: 1.7;
+        color: rgba(84, 84, 84, 0.6);
+        max-width: 480px;
+      }
+
+      .hero__cta-group {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 8px;
+      }
+
+      .btn--large {
+        padding: 16px 40px;
+        font-size: 0.95rem;
+      }
+
+      .btn--large svg {
+        margin-left: 8px;
+        width: 18px;
+        height: 18px;
+        transition: transform 0.25s;
+      }
+
+      .btn--primary.btn--large:hover svg {
+        transform: translateX(3px);
+      }
+
+      /* ── HERO VISUAL (right side) ── */
+      .hero__visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero__phone {
+        width: 320px;
+        height: 620px;
+        background: var(--black);
+        border-radius: 40px;
+        position: relative;
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18),
+          0 10px 30px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
+        transform: scale(1.02);
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .hero__phone-screen {
+        position: absolute;
+        inset: 8px;
+        border-radius: 34px;
+        background: linear-gradient(165deg, #121212 0%, #1a1a1a 100%);
+        display: flex;
+        flex-direction: column;
+        padding: 48px 20px 20px;
+        overflow: hidden;
+      }
+
+      .phone__notch {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 28px;
+        background: var(--black);
+        border-radius: 18px;
+        z-index: 5;
+      }
+
+      .phone__greeting {
+        color: #fff;
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+      }
+
+      .phone__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .phone__card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 8px;
+        padding: 10px 12px;
+        transition: background 0.2s;
+      }
+
+      .phone__card:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .phone__card-img {
+        width: 44px;
+        height: 44px;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+
+      .phone__card-img--1 {
+        background: linear-gradient(135deg, #e8115b, #f573a0);
+      }
+      .phone__card-img--2 {
+        background: linear-gradient(135deg, #1ed760, #0a8f3e);
+      }
+      .phone__card-img--3 {
+        background: linear-gradient(135deg, #509bf5, #1d3264);
+      }
+      .phone__card-img--4 {
+        background: linear-gradient(135deg, #f59b23, #e8115b);
+      }
+      .phone__card-img--5 {
+        background: linear-gradient(135deg, #8d67ab, #b4a0cc);
+      }
+      .phone__card-img--6 {
+        background: linear-gradient(135deg, #1ed760, #e4e2dd);
+      }
+
+      .phone__card-text {
+        color: #fff;
+        font-family: var(--font-ui);
+        font-weight: 600;
+        font-size: 0.72rem;
+        line-height: 1.3;
+      }
+
+      .phone__card-sub {
+        color: rgba(255, 255, 255, 0.45);
+        font-family: var(--font-ui);
+        font-weight: 400;
+        font-size: 0.62rem;
+        margin-top: 2px;
+      }
+
+      .phone__player {
+        margin-top: auto;
+        background: linear-gradient(
+          180deg,
+          rgba(30, 215, 96, 0.9),
+          rgba(30, 215, 96, 0.7)
+        );
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .phone__player-art {
+        width: 40px;
+        height: 40px;
+        background: var(--black);
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+
+      .phone__player-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .phone__player-title {
+        font-family: var(--font-ui);
+        font-weight: 700;
+        font-size: 0.7rem;
+        color: var(--black);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .phone__player-artist {
+        font-family: var(--font-ui);
+        font-weight: 500;
+        font-size: 0.6rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      .phone__player-btn {
+        width: 32px;
+        height: 32px;
+        background: var(--black);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .phone__player-btn svg {
+        fill: #fff;
+        width: 14px;
+        height: 14px;
+        margin-left: 2px;
+      }
+
+      /* floating elements */
+      .hero__float {
+        position: absolute;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        animation: float 6s ease-in-out infinite;
+        z-index: 2;
+      }
+
+      .hero__float--1 {
+        top: 40px;
+        right: -20px;
+        animation-delay: 0s;
+      }
+
+      .hero__float--2 {
+        bottom: 80px;
+        left: -30px;
+        animation-delay: -3s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+
+      .hero__float-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .hero__float-icon--green {
+        background: var(--green);
+      }
+
+      .hero__float-icon--black {
+        background: var(--black);
+      }
+
+      .hero__float-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .hero__float-text {
+        font-family: var(--font-ui);
+        font-weight: 600;
+        font-size: 0.78rem;
+        color: var(--black);
+      }
+
+      .hero__float-sub {
+        font-family: var(--font-ui);
+        font-weight: 400;
+        font-size: 0.65rem;
+        color: rgba(0, 0, 0, 0.45);
+        margin-top: 1px;
+      }
+
+      /* ───────────── MOBILE NAV OVERLAY ───────────── */
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s;
+      }
+
+      .mobile-nav.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .mobile-nav a {
+        font-family: var(--font-heading);
+        font-weight: 800;
+        font-size: 2rem;
+        color: var(--black);
+        transition: color 0.2s;
+      }
+
+      .mobile-nav a:hover {
+        color: var(--green);
+      }
+
+      .mobile-nav__close {
+        position: absolute;
+        top: 22px;
+        right: 48px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .mobile-nav__close svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--black);
+      }
+
+      /* ───────────── RESPONSIVE ───────────── */
+      @media (max-width: 1024px) {
+        .hero__container {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 48px;
+        }
+
+        .hero__content {
+          align-items: center;
+        }
+
+        .hero__subtitle {
+          max-width: 520px;
+        }
+
+        .hero__stats {
+          justify-content: center;
+        }
+
+        .hero__visual {
+          order: -1;
+        }
+
+        .hero__phone {
+          width: 260px;
+          height: 510px;
+        }
+
+        .hero__float--1 {
+          right: 10%;
+          top: 10px;
+        }
+
+        .hero__float--2 {
+          left: 10%;
+          bottom: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 0 24px;
+        }
+
+        .navbar__links {
+          display: none;
+        }
+
+        .navbar__actions {
+          display: none;
+        }
+
+        .navbar__hamburger {
+          display: flex;
+        }
+
+        .hero {
+          padding: 72px 24px 0;
+          min-height: auto;
+          padding-bottom: 60px;
+          padding-top: 120px;
+        }
+
+        .hero__cta-group {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .hero__cta-group .btn {
+          width: 100%;
+        }
+
+        .hero__stats {
+          gap: 28px;
+        }
+
+        .hero__float {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero__phone {
+          width: 220px;
+          height: 440px;
+        }
+
+        .phone__greeting {
+          font-size: 1rem;
+        }
+      }
+
+      /* ── HERO STATS (Enhanced) ── */
+      .hero__stats {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+        padding-top: 0;
+        border-top: none;
+      }
+
+      .hero__stat {
+        position: relative;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 22px 28px;
+        min-width: 150px;
+        transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        cursor: default;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      }
+
+      .hero__stat::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--green),
+          transparent
+        );
+        border-radius: 3px;
+        opacity: 0;
+        transition: all 0.35s ease;
+      }
+
+      .hero__stat::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 215, 96, 0.08) 0%,
+          transparent 50%
+        );
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+      }
+
+      .hero__stat-icon {
+        width: 44px;
+        height: 44px;
+        background: linear-gradient(135deg, var(--green) 0%, #17c557 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        box-shadow: 0 6px 20px rgba(30, 215, 96, 0.35);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+
+      .hero__stat:hover .hero__stat-icon {
+        transform: scale(1.08) rotate(-3deg);
+        box-shadow: 0 8px 28px rgba(30, 215, 96, 0.45);
+      }
+
+      .hero__stat-icon svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: var(--black);
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .hero__stat-number {
+        font-family: var(--font-heading);
+        font-weight: 900;
+        font-size: 2.1rem;
+        letter-spacing: -1.5px;
+        color: var(--black);
+        line-height: 1;
+        margin-bottom: 6px;
+        transition: color 0.3s ease;
+      }
+
+      .hero__stat:hover .hero__stat-number {
+        color: #0d7a3a;
+      }
+
+      .hero__stat-label {
+        font-family: var(--font-ui);
+        font-weight: 600;
+        font-size: 0.75rem;
+        color: rgba(0, 0, 0, 0.5);
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+
+      /* Responsive adjustments for stats */
+      @media (max-width: 1024px) {
+        .hero__stats {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .hero__stat {
+          min-width: 140px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero__stats {
+          gap: 12px;
+          width: 100%;
+        }
+
+        .hero__stat {
+          flex: 1;
+          min-width: 0;
+          padding: 18px 16px;
+        }
+
+        .hero__stat-icon {
+          width: 38px;
+          height: 38px;
+          margin-bottom: 12px;
+        }
+
+        .hero__stat-icon svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .hero__stat-number {
+          font-size: 1.6rem;
+        }
+
+        .hero__stat-label {
+          font-size: 0.65rem;
+        }
+      }
+
+      /* Player button states */
+      .phone__player-btn {
+        width: 32px;
+        height: 32px;
+        background: var(--black);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.2s ease;
+      }
+
+      .phone__player-btn:active {
+        transform: scale(0.9);
+      }
+
+      /* Base SVG styles */
+      .phone__player-btn svg {
+        fill: #fff;
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      /* Initial state - play visible, pause hidden */
+      .phone__player-btn .play-icon {
+        margin-left: 2px;
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+
+      .phone__player-btn .pause-icon {
+        opacity: 0;
+        transform: scale(0.8) rotate(90deg);
+        pointer-events: none; /* Add this to prevent ghost clicks */
+      }
+
+      /* Loading spinner */
+      .phone__player-btn .loading-spinner {
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-top-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Loading state */
+      .phone__player-btn.loading .play-icon,
+      .phone__player-btn.loading .pause-icon {
+        opacity: 0;
+        transform: scale(0.5) rotate(180deg);
+      }
+
+      .phone__player-btn.loading .loading-spinner {
+        opacity: 1;
+        animation: spin 0.8s linear infinite;
+      }
+
+      /* Playing state */
+      .phone__player-btn.playing .play-icon {
+        opacity: 0;
+        transform: scale(0.8) rotate(-90deg);
+        pointer-events: none;
+      }
+
+      .phone__player-btn.playing .pause-icon {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        pointer-events: all;
+      }
+
+      /* Spin animation */
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Play button hover effect */
+      .phone__player-btn {
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .phone__player-btn:hover {
+        background: #1a1a1a;
+        transform: scale(1.1);
+      }
+
+      /* Keep the active state */
+      .phone__player-btn:active {
+        transform: scale(0.9);
+      }
+
+      .phone__player-btn.playing {
+        animation: invert-flash 1.5s ease-in-out infinite;
+      }
+
+      @keyframes invert-flash {
+        0%,
+        100% {
+          background: var(--black);
+        }
+        50% {
+          background: #fff;
+          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      .phone__player-btn.playing svg {
+        animation: icon-invert 1.5s ease-in-out infinite;
+      }
+
+      @keyframes icon-invert {
+        0%,
+        100% {
+          fill: #fff;
+        }
+        50% {
+          fill: var(--black);
+        }
+      }
+
+      .hero__title {
+        font-family: var(--font-heading);
+        font-weight: 700; /* Changed from 900 to 700 */
+        font-size: clamp(2.8rem, 5.5vw, 5rem);
+        line-height: 1.02;
+        letter-spacing: -2px;
+        color: var(--black);
+      }
+
+      .navbar__logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-heading);
+        font-weight: 700; /* Changed from 900 to 700 */
+        font-size: 1.35rem;
+        letter-spacing: -0.5px;
+      }
+
+      .hero__stat-number {
+        font-family: var(--font-heading);
+        font-weight: 700; /* Changed from 900 to 700 */
+        font-size: 2.1rem;
+        letter-spacing: -1.5px;
+        color: var(--black);
+        line-height: 1;
+        margin-bottom: 6px;
+        transition: color 0.3s ease;
+      }
+
+      .phone__greeting {
+        color: #fff;
+        font-family: var(--font-heading);
+        font-weight: 700; /* Changed from 800 to 700 */
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+      }
+
+      /* Phone specific black overrides */
+      .hero__phone {
+        background: #000000; /* Keep phone frame black */
+        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18),
+          /* Black shadows */ 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .phone__notch {
+        background: #000000; /* Keep notch black */
+      }
+
+      .phone__player-art {
+        background: #000000; /* Keep album art placeholder black */
+      }
+
+      .phone__player-btn {
+        background: #000000; /* Keep play button black */
+      }
+
+      .phone__player-title {
+        color: #000000; /* Keep song title black */
+      }
+
+      .phone__player-artist {
+        color: rgba(0, 0, 0, 0.6); /* Keep artist name black */
+      }
+
+      /* Keep the playing animation with black */
+      .phone__player-btn.playing {
+        animation: invert-flash 1.5s ease-in-out infinite;
+      }
+
+      @keyframes invert-flash {
+        0%,
+        100% {
+          background: #000000; /* Black */
+        }
+        50% {
+          background: #fff;
+          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      .phone__player-btn.playing svg {
+        animation: icon-invert 1.5s ease-in-out infinite;
+      }
+
+      @keyframes icon-invert {
+        0%,
+        100% {
+          fill: #fff;
+        }
+        50% {
+          fill: #000000; /* Black */
+        }
+      }
+
+      /* Hover state */
+      .phone__player-btn:hover {
+        background: #1a1a1a; /* Dark gray on hover */
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ════════════ NAVBAR ════════════ -->
+    <nav class="navbar" id="navbar">
+      <a href="#" class="navbar__logo">
+        <img src="logo.png" height="40px" />
+      </a>
+
+      <ul class="navbar__links">
+        <li><a href="#">Premium</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Download</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+
+      <div class="navbar__actions">
+        <a href="#" class="btn btn--ghost">Log in</a>
+        <a href="#" class="btn btn--primary">Sign up free</a>
+      </div>
+
+      <button
+        class="navbar__hamburger"
+        id="hamburgerBtn"
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- mobile nav -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-nav__close" id="closeNav" aria-label="Close menu">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <a href="#">Premium</a>
+      <a href="#">Support</a>
+      <a href="#">Download</a>
+      <a href="#">About</a>
+      <a href="#" class="btn btn--ghost" style="margin-top: 16px">Log in</a>
+      <a href="#" class="btn btn--primary">Sign up free</a>
+    </div>
+
+    <!-- ════════════ HERO ════════════ -->
+    <section class="hero">
+      <div class="hero__container">
+        <div class="hero__content">
+          <h1 class="hero__title">
+            Music for<br />
+            every <span class="highlight">moment</span>.
+          </h1>
+
+          <p class="hero__subtitle">
+            Listen to your favorite artists from anywhere, now on Songify. Get
+            access to millions of songs, podcasts and videos from creators all
+            over the world.
+          </p>
+
+          <div class="hero__cta-group">
+            <a href="#" class="btn btn--primary btn--large">
+              Get started free
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a href="#" class="btn btn--ghost btn--large">Log in</a>
+          </div>
+
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <div class="hero__stat-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div class="hero__stat-number">615M+</div>
+              <div class="hero__stat-label">Active users</div>
+            </div>
+            <div class="hero__stat">
+              <div class="hero__stat-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 18V5l12-2v13"></path>
+                  <circle cx="6" cy="18" r="3"></circle>
+                  <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+              </div>
+              <div class="hero__stat-number">100M+</div>
+              <div class="hero__stat-label">Songs available</div>
+            </div>
+            <div class="hero__stat">
+              <div class="hero__stat-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="hero__stat-number">180+</div>
+              <div class="hero__stat-label">Countries</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <!-- phone mockup -->
+          <div class="hero__phone">
+            <div class="hero__phone-screen">
+              <div class="phone__notch"></div>
+              <div class="phone__greeting">Good evening</div>
+
+              <div class="phone__cards">
+                <div class="phone__card">
+                  <div class="phone__card-img phone__card-img--1"></div>
+                  <div>
+                    <div class="phone__card-text">Today's Top Hits</div>
+                    <div class="phone__card-sub">Playlist • Songify</div>
+                  </div>
+                </div>
+                <div class="phone__card">
+                  <div class="phone__card-img phone__card-img--2"></div>
+                  <div>
+                    <div class="phone__card-text">RapCaviar</div>
+                    <div class="phone__card-sub">Playlist • Songify</div>
+                  </div>
+                </div>
+                <div class="phone__card">
+                  <div class="phone__card-img phone__card-img--3"></div>
+                  <div>
+                    <div class="phone__card-text">Chill Hits</div>
+                    <div class="phone__card-sub">Playlist • Songify</div>
+                  </div>
+                </div>
+                <div class="phone__card">
+                  <div class="phone__card-img phone__card-img--4"></div>
+                  <div>
+                    <div class="phone__card-text">Discover Weekly</div>
+                    <div class="phone__card-sub">Made for you</div>
+                  </div>
+                </div>
+                <div class="phone__card">
+                  <div class="phone__card-img phone__card-img--5"></div>
+                  <div>
+                    <div class="phone__card-text">Release Radar</div>
+                    <div class="phone__card-sub">Made for you</div>
+                  </div>
+                </div>
+                <div class="phone__card">
+                  <div class="phone__card-img phone__card-img--6"></div>
+                  <div>
+                    <div class="phone__card-text">Daily Mix 1</div>
+                    <div class="phone__card-sub">Made for you</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="phone__player">
+                <div class="phone__player-art"></div>
+                <div class="phone__player-info">
+                  <div class="phone__player-title">Diamonds</div>
+                  <div class="phone__player-artist">Rihanna</div>
+                </div>
+                <div class="phone__player-btn" id="playBtn">
+                  <svg class="play-icon" viewBox="0 0 24 24">
+                    <polygon points="5,3 19,12 5,21" />
+                  </svg>
+                  <svg class="pause-icon" viewBox="0 0 24 24">
+                    <rect x="6" y="4" width="4" height="16" />
+                    <rect x="14" y="4" width="4" height="16" />
+                  </svg>
+                  <div class="loading-spinner"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Play button animation
+      const playBtn = document.getElementById("playBtn");
+      let isPlaying = false;
+
+      playBtn.addEventListener("click", function () {
+        // Don't allow clicks during animation
+        if (this.classList.contains("loading")) return;
+
+        // Add loading state
+        this.classList.add("loading");
+
+        // After 800ms, switch to play/pause
+        setTimeout(() => {
+          this.classList.remove("loading");
+
+          if (!isPlaying) {
+            this.classList.add("playing");
+            isPlaying = true;
+
+            // Auto-stop after 3 seconds (optional - remove if you want manual control)
+            setTimeout(() => {
+              this.classList.remove("playing");
+              isPlaying = false;
+            }, 3000);
+          } else {
+            this.classList.remove("playing");
+            isPlaying = false;
+          }
+        }, 800);
+      });
+
+      // Mobile nav toggle
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const mobileNav = document.getElementById("mobileNav");
+      const closeNav = document.getElementById("closeNav");
+
+      hamburgerBtn.addEventListener("click", () =>
+        mobileNav.classList.add("active")
+      );
+      closeNav.addEventListener("click", () =>
+        mobileNav.classList.remove("active")
+      );
+
+      mobileNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () =>
+          mobileNav.classList.remove("active")
+        );
+      });
+
+      // Navbar background on scroll
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 10) {
+          navbar.style.background = "rgba(228,226,221,0.95)";
+          navbar.style.boxShadow = "0 2px 20px rgba(0,0,0,0.06)";
+        } else {
+          navbar.style.background = "rgba(228,226,221,0.82)";
+          navbar.style.boxShadow = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
