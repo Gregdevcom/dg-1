@@ -66,7 +66,7 @@
         align-items: center;
         gap: 10px;
         font-family: var(--font-heading);
-        font-weight: 900;
+        font-weight: 700;
         font-size: 1.35rem;
         letter-spacing: -0.5px;
       }
@@ -262,7 +262,7 @@
 
       .hero__title {
         font-family: var(--font-heading);
-        font-weight: 900;
+        font-weight: 700;
         font-size: clamp(2.8rem, 5.5vw, 5rem);
         line-height: 1.02;
         letter-spacing: -2px;
@@ -327,172 +327,18 @@
         justify-content: center;
       }
 
-      .hero__phone {
-        width: 320px;
-        height: 620px;
-        background: var(--black);
-        border-radius: 40px;
-        position: relative;
-        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18),
-          0 10px 30px rgba(0, 0, 0, 0.12);
-        overflow: hidden;
-        transform: scale(1.02);
+      .hero__phone-image {
+        max-width: 100%;
+        height: auto;
+        max-height: 620px;
+        object-fit: contain;
+        filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.18))
+          drop-shadow(0 10px 30px rgba(0, 0, 0, 0.12));
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-
-      .hero__phone-screen {
-        position: absolute;
-        inset: 8px;
-        border-radius: 34px;
-        background: linear-gradient(165deg, #121212 0%, #1a1a1a 100%);
-        display: flex;
-        flex-direction: column;
-        padding: 48px 20px 20px;
-        overflow: hidden;
-      }
-
-      .phone__notch {
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 28px;
-        background: var(--black);
-        border-radius: 18px;
-        z-index: 5;
-      }
-
-      .phone__greeting {
-        color: #fff;
-        font-family: var(--font-heading);
-        font-weight: 800;
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-      }
-
-      .phone__cards {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .phone__card {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 8px;
-        padding: 10px 12px;
-        transition: background 0.2s;
-      }
-
-      .phone__card:hover {
-        background: rgba(255, 255, 255, 0.12);
-      }
-
-      .phone__card-img {
-        width: 44px;
-        height: 44px;
-        border-radius: 6px;
-        flex-shrink: 0;
-      }
-
-      .phone__card-img--1 {
-        background: linear-gradient(135deg, #e8115b, #f573a0);
-      }
-      .phone__card-img--2 {
-        background: linear-gradient(135deg, #1ed760, #0a8f3e);
-      }
-      .phone__card-img--3 {
-        background: linear-gradient(135deg, #509bf5, #1d3264);
-      }
-      .phone__card-img--4 {
-        background: linear-gradient(135deg, #f59b23, #e8115b);
-      }
-      .phone__card-img--5 {
-        background: linear-gradient(135deg, #8d67ab, #b4a0cc);
-      }
-      .phone__card-img--6 {
-        background: linear-gradient(135deg, #1ed760, #e4e2dd);
-      }
-
-      .phone__card-text {
-        color: #fff;
-        font-family: var(--font-ui);
-        font-weight: 600;
-        font-size: 0.72rem;
-        line-height: 1.3;
-      }
-
-      .phone__card-sub {
-        color: rgba(255, 255, 255, 0.45);
-        font-family: var(--font-ui);
-        font-weight: 400;
-        font-size: 0.62rem;
-        margin-top: 2px;
-      }
-
-      .phone__player {
-        margin-top: auto;
-        background: linear-gradient(
-          180deg,
-          rgba(30, 215, 96, 0.9),
-          rgba(30, 215, 96, 0.7)
-        );
-        border-radius: 10px;
-        padding: 12px 14px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .phone__player-art {
-        width: 40px;
-        height: 40px;
-        background: var(--black);
-        border-radius: 6px;
-        flex-shrink: 0;
-      }
-
-      .phone__player-info {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .phone__player-title {
-        font-family: var(--font-ui);
-        font-weight: 700;
-        font-size: 0.7rem;
-        color: var(--black);
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .phone__player-artist {
-        font-family: var(--font-ui);
-        font-weight: 500;
-        font-size: 0.6rem;
-        color: rgba(0, 0, 0, 0.6);
-      }
-
-      .phone__player-btn {
-        width: 32px;
-        height: 32px;
-        background: var(--black);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
-
-      .phone__player-btn svg {
-        fill: #fff;
-        width: 14px;
-        height: 14px;
-        margin-left: 2px;
+        border-radius: 15px;
+        border: 1px solid transparent;
+        user-select: none;
+        pointer-events: none;
       }
 
       /* floating elements */
@@ -645,9 +491,8 @@
           order: -1;
         }
 
-        .hero__phone {
-          width: 260px;
-          height: 510px;
+        .hero__phone-image {
+          max-height: 510px;
         }
 
         .hero__float--1 {
@@ -704,13 +549,8 @@
       }
 
       @media (max-width: 480px) {
-        .hero__phone {
-          width: 220px;
-          height: 440px;
-        }
-
-        .phone__greeting {
-          font-size: 1rem;
+        .hero__phone-image {
+          max-height: 440px;
         }
       }
 
@@ -804,7 +644,7 @@
 
       .hero__stat-number {
         font-family: var(--font-heading);
-        font-weight: 900;
+        font-weight: 700;
         font-size: 2.1rem;
         letter-spacing: -1.5px;
         color: var(--black);
@@ -868,239 +708,6 @@
         .hero__stat-label {
           font-size: 0.65rem;
         }
-      }
-
-      /* Player button states */
-      .phone__player-btn {
-        width: 32px;
-        height: 32px;
-        background: var(--black);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        cursor: pointer;
-        position: relative;
-        transition: transform 0.2s ease;
-      }
-
-      .phone__player-btn:active {
-        transform: scale(0.9);
-      }
-
-      /* Base SVG styles */
-      .phone__player-btn svg {
-        fill: #fff;
-        width: 14px;
-        height: 14px;
-        position: absolute;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
-
-      /* Initial state - play visible, pause hidden */
-      .phone__player-btn .play-icon {
-        margin-left: 2px;
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-      }
-
-      .phone__player-btn .pause-icon {
-        opacity: 0;
-        transform: scale(0.8) rotate(90deg);
-        pointer-events: none; /* Add this to prevent ghost clicks */
-      }
-
-      /* Loading spinner */
-      .phone__player-btn .loading-spinner {
-        width: 18px;
-        height: 18px;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        border-top-color: #fff;
-        border-radius: 50%;
-        position: absolute;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      /* Loading state */
-      .phone__player-btn.loading .play-icon,
-      .phone__player-btn.loading .pause-icon {
-        opacity: 0;
-        transform: scale(0.5) rotate(180deg);
-      }
-
-      .phone__player-btn.loading .loading-spinner {
-        opacity: 1;
-        animation: spin 0.8s linear infinite;
-      }
-
-      /* Playing state */
-      .phone__player-btn.playing .play-icon {
-        opacity: 0;
-        transform: scale(0.8) rotate(-90deg);
-        pointer-events: none;
-      }
-
-      .phone__player-btn.playing .pause-icon {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-        pointer-events: all;
-      }
-
-      /* Spin animation */
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Play button hover effect */
-      .phone__player-btn {
-        transition: transform 0.2s ease, background 0.2s ease;
-      }
-
-      .phone__player-btn:hover {
-        background: #1a1a1a;
-        transform: scale(1.1);
-      }
-
-      /* Keep the active state */
-      .phone__player-btn:active {
-        transform: scale(0.9);
-      }
-
-      .phone__player-btn.playing {
-        animation: invert-flash 1.5s ease-in-out infinite;
-      }
-
-      @keyframes invert-flash {
-        0%,
-        100% {
-          background: var(--black);
-        }
-        50% {
-          background: #fff;
-          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
-        }
-      }
-
-      .phone__player-btn.playing svg {
-        animation: icon-invert 1.5s ease-in-out infinite;
-      }
-
-      @keyframes icon-invert {
-        0%,
-        100% {
-          fill: #fff;
-        }
-        50% {
-          fill: var(--black);
-        }
-      }
-
-      .hero__title {
-        font-family: var(--font-heading);
-        font-weight: 700; /* Changed from 900 to 700 */
-        font-size: clamp(2.8rem, 5.5vw, 5rem);
-        line-height: 1.02;
-        letter-spacing: -2px;
-        color: var(--black);
-      }
-
-      .navbar__logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: var(--font-heading);
-        font-weight: 700; /* Changed from 900 to 700 */
-        font-size: 1.35rem;
-        letter-spacing: -0.5px;
-      }
-
-      .hero__stat-number {
-        font-family: var(--font-heading);
-        font-weight: 700; /* Changed from 900 to 700 */
-        font-size: 2.1rem;
-        letter-spacing: -1.5px;
-        color: var(--black);
-        line-height: 1;
-        margin-bottom: 6px;
-        transition: color 0.3s ease;
-      }
-
-      .phone__greeting {
-        color: #fff;
-        font-family: var(--font-heading);
-        font-weight: 700; /* Changed from 800 to 700 */
-        font-size: 1.3rem;
-        margin-bottom: 20px;
-      }
-
-      /* Phone specific black overrides */
-      .hero__phone {
-        background: #000000; /* Keep phone frame black */
-        box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18),
-          /* Black shadows */ 0 10px 30px rgba(0, 0, 0, 0.12);
-      }
-
-      .phone__notch {
-        background: #000000; /* Keep notch black */
-      }
-
-      .phone__player-art {
-        background: #000000; /* Keep album art placeholder black */
-      }
-
-      .phone__player-btn {
-        background: #000000; /* Keep play button black */
-      }
-
-      .phone__player-title {
-        color: #000000; /* Keep song title black */
-      }
-
-      .phone__player-artist {
-        color: rgba(0, 0, 0, 0.6); /* Keep artist name black */
-      }
-
-      /* Keep the playing animation with black */
-      .phone__player-btn.playing {
-        animation: invert-flash 1.5s ease-in-out infinite;
-      }
-
-      @keyframes invert-flash {
-        0%,
-        100% {
-          background: #000000; /* Black */
-        }
-        50% {
-          background: #fff;
-          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
-        }
-      }
-
-      .phone__player-btn.playing svg {
-        animation: icon-invert 1.5s ease-in-out infinite;
-      }
-
-      @keyframes icon-invert {
-        0%,
-        100% {
-          fill: #fff;
-        }
-        50% {
-          fill: #000000; /* Black */
-        }
-      }
-
-      /* Hover state */
-      .phone__player-btn:hover {
-        background: #1a1a1a; /* Dark gray on hover */
-        transform: scale(1.1);
       }
     </style>
   </head>
@@ -1229,112 +836,17 @@
         </div>
 
         <div class="hero__visual">
-          <!-- phone mockup -->
-          <div class="hero__phone">
-            <div class="hero__phone-screen">
-              <div class="phone__notch"></div>
-              <div class="phone__greeting">Good evening</div>
-
-              <div class="phone__cards">
-                <div class="phone__card">
-                  <div class="phone__card-img phone__card-img--1"></div>
-                  <div>
-                    <div class="phone__card-text">Today's Top Hits</div>
-                    <div class="phone__card-sub">Playlist • Songify</div>
-                  </div>
-                </div>
-                <div class="phone__card">
-                  <div class="phone__card-img phone__card-img--2"></div>
-                  <div>
-                    <div class="phone__card-text">RapCaviar</div>
-                    <div class="phone__card-sub">Playlist • Songify</div>
-                  </div>
-                </div>
-                <div class="phone__card">
-                  <div class="phone__card-img phone__card-img--3"></div>
-                  <div>
-                    <div class="phone__card-text">Chill Hits</div>
-                    <div class="phone__card-sub">Playlist • Songify</div>
-                  </div>
-                </div>
-                <div class="phone__card">
-                  <div class="phone__card-img phone__card-img--4"></div>
-                  <div>
-                    <div class="phone__card-text">Discover Weekly</div>
-                    <div class="phone__card-sub">Made for you</div>
-                  </div>
-                </div>
-                <div class="phone__card">
-                  <div class="phone__card-img phone__card-img--5"></div>
-                  <div>
-                    <div class="phone__card-text">Release Radar</div>
-                    <div class="phone__card-sub">Made for you</div>
-                  </div>
-                </div>
-                <div class="phone__card">
-                  <div class="phone__card-img phone__card-img--6"></div>
-                  <div>
-                    <div class="phone__card-text">Daily Mix 1</div>
-                    <div class="phone__card-sub">Made for you</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="phone__player">
-                <div class="phone__player-art"></div>
-                <div class="phone__player-info">
-                  <div class="phone__player-title">Diamonds</div>
-                  <div class="phone__player-artist">Rihanna</div>
-                </div>
-                <div class="phone__player-btn" id="playBtn">
-                  <svg class="play-icon" viewBox="0 0 24 24">
-                    <polygon points="5,3 19,12 5,21" />
-                  </svg>
-                  <svg class="pause-icon" viewBox="0 0 24 24">
-                    <rect x="6" y="4" width="4" height="16" />
-                    <rect x="14" y="4" width="4" height="16" />
-                  </svg>
-                  <div class="loading-spinner"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Phone image replaces the old phone mockup -->
+          <img
+            src="phone.jpg"
+            alt="Songify app on phone"
+            class="hero__phone-image"
+          />
         </div>
       </div>
     </section>
 
     <script>
-      // Play button animation
-      const playBtn = document.getElementById("playBtn");
-      let isPlaying = false;
-
-      playBtn.addEventListener("click", function () {
-        // Don't allow clicks during animation
-        if (this.classList.contains("loading")) return;
-
-        // Add loading state
-        this.classList.add("loading");
-
-        // After 800ms, switch to play/pause
-        setTimeout(() => {
-          this.classList.remove("loading");
-
-          if (!isPlaying) {
-            this.classList.add("playing");
-            isPlaying = true;
-
-            // Auto-stop after 3 seconds (optional - remove if you want manual control)
-            setTimeout(() => {
-              this.classList.remove("playing");
-              isPlaying = false;
-            }, 3000);
-          } else {
-            this.classList.remove("playing");
-            isPlaying = false;
-          }
-        }, 800);
-      });
-
       // Mobile nav toggle
       const hamburgerBtn = document.getElementById("hamburgerBtn");
       const mobileNav = document.getElementById("mobileNav");
