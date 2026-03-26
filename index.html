@@ -315,10 +315,6 @@
         transition: transform 0.25s;
       }
 
-      .btn--primary.btn--large:hover svg {
-        transform: translateX(3px);
-      }
-
       /* ── HERO VISUAL (right side) ── */
       .hero__visual {
         position: relative;
@@ -575,43 +571,12 @@
         transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
         cursor: default;
         overflow: hidden;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+
+        border: 2px solid transparent;
       }
 
-      .hero__stat::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40%;
-        height: 3px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--green),
-          transparent
-        );
-        border-radius: 3px;
-        opacity: 0;
-        transition: all 0.35s ease;
-      }
-
-      .hero__stat::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          135deg,
-          rgba(30, 215, 96, 0.08) 0%,
-          transparent 50%
-        );
-        opacity: 0;
-        transition: opacity 0.35s ease;
-        pointer-events: none;
+      .hero__stat:hover {
+        border: 2px solid rgba(0, 0, 0, 0.3);
       }
 
       .hero__stat-icon {
@@ -623,13 +588,13 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 16px;
-        box-shadow: 0 6px 20px rgba(30, 215, 96, 0.35);
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+        border: 2px solid transparent;
+        transition: all 0.35s ease;
       }
 
       .hero__stat:hover .hero__stat-icon {
-        transform: scale(1.08) rotate(-3deg);
-        box-shadow: 0 8px 28px rgba(30, 215, 96, 0.45);
+        border: 2px solid rgba(0, 0, 0, 0.3);
       }
 
       .hero__stat-icon svg {
@@ -714,20 +679,20 @@
   <body>
     <!-- ════════════ NAVBAR ════════════ -->
     <nav class="navbar" id="navbar">
-      <a href="#" class="navbar__logo">
+      <a href="/" class="navbar__logo">
         <img src="logo.png" height="40px" />
       </a>
 
       <ul class="navbar__links">
-        <li><a href="#">Premium</a></li>
-        <li><a href="#">Support</a></li>
-        <li><a href="#">Download</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="">Premium</a></li>
+        <li><a href="">Support</a></li>
+        <li><a href="">Download</a></li>
+        <li><a href="">About</a></li>
       </ul>
 
       <div class="navbar__actions">
-        <a href="#" class="btn btn--ghost">Log in</a>
-        <a href="#" class="btn btn--primary">Sign up free</a>
+        <a href="" class="btn btn--ghost">Log in</a>
+        <a href="" class="btn btn--primary">Sign up free</a>
       </div>
 
       <button
@@ -754,12 +719,12 @@
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
-      <a href="#">Premium</a>
-      <a href="#">Support</a>
-      <a href="#">Download</a>
-      <a href="#">About</a>
-      <a href="#" class="btn btn--ghost" style="margin-top: 16px">Log in</a>
-      <a href="#" class="btn btn--primary">Sign up free</a>
+      <a href="">Premium</a>
+      <a href="">Support</a>
+      <a href="">Download</a>
+      <a href="">About</a>
+      <a href="" class="btn btn--ghost" style="margin-top: 16px">Log in</a>
+      <a href="" class="btn btn--primary">Sign up free</a>
     </div>
 
     <!-- ════════════ HERO ════════════ -->
@@ -778,7 +743,7 @@
           </p>
 
           <div class="hero__cta-group">
-            <a href="#" class="btn btn--primary btn--large">
+            <a href="" class="btn btn--primary btn--large">
               Get started free
               <svg
                 viewBox="0 0 24 24"
@@ -792,7 +757,7 @@
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a href="#" class="btn btn--ghost btn--large">Log in</a>
+            <a href="" class="btn btn--ghost btn--large">Log in</a>
           </div>
 
           <div class="hero__stats">
